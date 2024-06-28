@@ -1,50 +1,69 @@
+import { useState, ChangeEvent, FormEvent } from "react";
 import { FaLocationArrow } from "react-icons/fa6";
-
 import { socialMedia } from "@/data";
 import MagicButton from "./ui/MagicButton";
-import { Input } from "./ui/Input";
 
 const Contact = () => {
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+
+  const handleMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setMessage(e.target.value);
+  };
+
+  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("Submitted", { email, message });
+  };
+
   return (
-    <footer className="w-full pt-20 pb-10" id="contact">
-      <div className="w-full absolute left-0 -bottom-72 min-h-96">
+    <footer className="w-full pt-20 pb-10 relative" id="contact">
+      <div className="absolute inset-0">
         <img
           src="/footer-grid.svg"
           alt="grid"
-          className="w-full h-full opacity-50 "
+          className="w-full h-full opacity-50"
         />
       </div>
 
-      <div className="flex flex-col items-center">
-        <h1 className="heading lg:max-w-[35vw]    ">
+      <div className="relative z-10 flex flex-col items-center">
+        <h1 className="heading lg:max-w-[35vw] text-center">
           I’d Love to Hear from
-          <span className="text-yellow"> You</span>  Get in Touch!
+          <span className="text-yellow"> You</span> Get in Touch!
         </h1>
-       
 
-        <div className="grid grid-cols-1 gap-y-2 lg:w-[800px]  w-[500px] my-10">
+        <form onSubmit={onSubmit} className="grid grid-cols-1 gap-y-2 lg:w-[800px] w-[500px] my-10">
           <input
             id="email"
             type="text"
-            className=" border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4  flex-1 focus:border-yellow active:border-yellow outline-none"
+            value={email}
+            onChange={handleEmailChange}
+            className="border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none"
             placeholder="xyz@d07.com"
-          ></input>
+          />
           <textarea
             id="message"
-            className="sm:my-5 border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4  flex-1 focus:border-yellow active:border-yellow outline-none"
+            value={message}
+            onChange={handleMessageChange}
+            className="sm:my-5 border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none"
             rows={5}
             placeholder="Hey Divyakumar, This is an awesome website!"
-          ></textarea>
-        </div>
-        <div>
-          <MagicButton
-            title="Send"
-            icon={<FaLocationArrow />}
-            position="right"
           />
+          <div className="flex justify-center mt-4">
+            <MagicButton
+              title="Send"
+              icon={<FaLocationArrow />}
+              position="right"
+            />
           </div>
+        </form>
       </div>
-      <div className="flex mt-16 md:flex-row flex-col justify-between items-center">
+
+      <div className="relative z-10 flex mt-16 md:flex-row flex-col justify-between items-center">
         <p className="md:text-base text-sm md:font-normal font-light">
           Made with ❤ by Divy
         </p>
