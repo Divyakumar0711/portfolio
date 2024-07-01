@@ -142,14 +142,17 @@ export const workExperience = [
 export const socialMedia = [
   {
     id: 1,
-    img: "/git.svg",
+    img: "/email.svg",
+    link: "mailto:divyakumarpatel711@gmail.com",
   },
   {
     id: 2,
-    img: "/twit.svg",
+    img: "/git.svg",
+    link: "https://github.com/Divyakumar0711",
   },
   {
     id: 3,
     img: "/link.svg",
+    link: "https://www.linkedin.com/in/divyakumar-patel-00b8661a7/",
   },
 ];

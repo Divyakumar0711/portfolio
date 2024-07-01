@@ -2,10 +2,12 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { FaLocationArrow } from "react-icons/fa6";
 import { socialMedia } from "@/data";
 import MagicButton from "./ui/MagicButton";
+import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 const Contact = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [status, setStatus] = useState("");
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
@@ -15,9 +17,30 @@ const Contact = () => {
     setMessage(e.target.value);
   };
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    console.log("Submitted", { email, message });
+    const scriptURL =
+      "https://script.google.com/macros/s/AKfycbwPXMT7z42Ylng8CUSLFwAAzZecBI0ZWm5V7Lscixg6UIQdRwp9UhhpIJDwGM1QSAiS/exec";
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("message", message);
+
+    try {
+      const response = await fetch(scriptURL, {
+        method: "POST",
+        body: formData,
+      });
+      if (response.ok) {
+        setStatus("Success! Your message has been sent.");
+        setEmail(""); 
+        setMessage("");
+      } else {
+        setStatus("Error! Something went wrong.");
+      }
+    } catch (error) {
+      setStatus("Error! Something went wrong.");
+      console.error("Error!", error);
+    }
   };
 
   return (
@@ -36,7 +59,10 @@ const Contact = () => {
           <span className="text-yellow"> You</span> Get in Touch!
         </h1>
 
-        <form onSubmit={onSubmit} className="grid grid-cols-1 gap-y-2 lg:w-[800px] w-[500px] my-10">
+        <form
+          onSubmit={onSubmit}
+          className="grid grid-cols-1 gap-y-2 lg:w-[800px] w-[500px] my-10"
+        >
           <input
             id="email"
             type="text"
@@ -61,6 +87,12 @@ const Contact = () => {
             />
           </div>
         </form>
+        {status && (
+          <TextGenerateEffect
+            words={status}
+            className="text-center text-[20px] md:text-2xl lg:text-3xl"
+          />
+        )}
       </div>
 
       <div className="relative z-10 flex mt-16 md:flex-row flex-col justify-between items-center">
@@ -70,12 +102,13 @@ const Contact = () => {
 
         <div className="flex items-center md:gap-3 gap-6 sm:my-5">
           {socialMedia.map((info) => (
-            <div
+            <a
               key={info.id}
+              href={info.link}
               className="w-10 h-10 cursor-pointer flex justify-center items-center backdrop-filter backdrop-blur-lg saturate-180 bg-opacity-75 bg-black-200 rounded-lg border border-black-300"
             >
               <img src={info.img} alt="icons" width={20} height={20} />
-            </div>
+            </a>
           ))}
         </div>
       </div>
