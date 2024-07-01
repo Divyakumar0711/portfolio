@@ -32,7 +32,7 @@ const Contact = () => {
       });
       if (response.ok) {
         setStatus("Success! Your message has been sent.");
-        setEmail(""); 
+        setEmail("");
         setMessage("");
       } else {
         setStatus("Error! Something went wrong.");
@@ -61,21 +61,21 @@ const Contact = () => {
 
         <form
           onSubmit={onSubmit}
-          className="grid grid-cols-1 gap-y-2 lg:w-[800px] w-[500px] my-10"
+          className="grid gap-y-4 w-full max-w-lg mx-auto my-10"
         >
           <input
             id="email"
             type="text"
             value={email}
             onChange={handleEmailChange}
-            className="border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none"
+            className="border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none w-full"
             placeholder="xyz@d07.com"
           />
           <textarea
             id="message"
             value={message}
             onChange={handleMessageChange}
-            className="sm:my-5 border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none"
+            className="border border-purple rounded-lg custom-scroll-bar-x border-opacity-50 bg-black p-4 flex-1 focus:border-yellow active:border-yellow outline-none w-full"
             rows={5}
             placeholder="Hey Divyakumar, This is an awesome website!"
           />
@@ -87,6 +87,7 @@ const Contact = () => {
             />
           </div>
         </form>
+
         {status && (
           <TextGenerateEffect
             words={status}
