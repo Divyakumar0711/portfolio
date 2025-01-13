@@ -59,11 +59,11 @@ export const projects = [
   },
   {
     id: 3,
-    title: "CPU Scheduling Tasks Visualiser",
-    des: "React-Native framework to visualize the behavior of 8 preemtive and nonpreemtive CPU scheduling algorithms.",
-    img: "/img/project/cpuImg.png",
-    iconLists: ["/rn.svg", "/expo.svg", "/js.png"],
-    link: "https://github.com/Divyakumar0711/CPU-Scheduling-APP-React-Native-master",
+    title: "Ryde",
+    des: "Ryde is a React Native app for seamless ride booking with an intuitive user interface and real-time functionality.",
+    img: "/img/project/ryde.png",
+    iconLists: [ "/expo.svg", "/ts.svg"],
+    link: "https://github.com/Divyakumar0711/Ryde",
   },
   {
     id: 4,
